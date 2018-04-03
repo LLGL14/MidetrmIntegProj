@@ -1,4 +1,5 @@
 import java.util.*;
+import java.rmi.*;
 
 public class AdminModuleFunctionalities{
 	public static void main(String[] args){
