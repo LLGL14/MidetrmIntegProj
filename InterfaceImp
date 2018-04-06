@@ -1,0 +1,29 @@
+import java.rmi.registry.*;
+import java.rmi.server.*;
+import java.rmi.rmi.*;
+import java.io.*;
+import java.util.*;
+
+public class InterfaceImp extends UnicastRemoteObject implements G5Interface{
+	Registry r;
+	Scanner scan = new Scanner(System.in);
+
+	public InterfaceImp() throws RemoteException{
+	}
+
+	public void startServer(InterfaceImp admin) throws RemoteException{
+		r = LocateRegistry.createRegistry(9999);
+		r.rebind("Admin", admin);
+		System.out.println("RMI server is running...");
+	}
+
+	public void stopServer() throws RemoteException{
+		try{
+			r.unbind("Admin");
+			System.out.println("RMI server has stopped");
+		} catch(NotBoundException nbe){
+			System,out.println("No server is running");
+		}
+	}
+
+}
