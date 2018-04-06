@@ -1,0 +1,41 @@
+import java.rmi.*;
+import java.rmi.registry.*;
+import java.util.Scanner;
+import java.io.*;
+
+public class AdminModule{
+	Scanner scan = new Scanner(System.in);
+	Interface admin;
+	Registry registry;
+	BufferedReader br;
+
+	public static void evaluateChoice(int choice) throws RemoteException{
+		try {
+			switch(choice){
+				case 1: admin.startServer(admin);
+					break;
+				case 2: admin.stopServer();
+					break;
+				case 3: admin.createProject();
+					break;
+				case 4: admin.viewProjectList();
+					break;
+			}
+		} catch(Exception ex) {
+			System.out.println("No Server is running.");
+		}
+	}
+	public void main(String[] args) throws Exception{
+		boolean b = logIn();
+		System.out.println("Welcome!");
+		System.out.println("1. Start the Server");
+		System.out.println("2. Stop the Server");
+		System.out.println("3. Create Project");
+		System.out.println("4. View Project List");
+		System.out.println("5: ");
+		System.out.println("Enter your choice: ");
+
+		int choice = scan.nextInt();
+		evaluateChoice(choice);
+	}
+}
